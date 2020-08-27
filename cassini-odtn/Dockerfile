@@ -70,4 +70,12 @@ EXPOSE 8080
 RUN chmod +x /root/script/push-data.sh
 WORKDIR /root
 
+LABEL br.rnp.label.name="cassini-odtn"\
+      br.rnp.label.description="SDN transponder cassini from ODTN"\
+      br.rnp.label.vendor="National Network for Education and Research - RNP"\
+      br.rnp.label.contact="fernando.farias@rnp.br"\
+      br.rnp.label.application="CNetLab"\
+      br.rnp.label.version="0.1"\
+      br.rnp.label.license="Apache2"
+
 CMD ["/root/script/push-data.sh"]
