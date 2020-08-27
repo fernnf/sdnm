@@ -1,2 +1,2 @@
-# sdnm
-The SDN-Multilayer containers models repository for CNetLab by RNP 
+# SDNM Project SDN-Multilayer 
+The SDN-Multilayer containers models repository for CNetLab network emulator by RNP 
