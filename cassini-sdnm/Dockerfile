@@ -8,5 +8,4 @@ ENV PYTHONPATH=/root/cassini-dataplane/
 
 RUN chmod +x /root/cassini-dataplane/docker/sdnm/init-service.sh
 
-
 CMD ["/root/cassini-dataplane/docker/sdnml/init-service.sh"]
