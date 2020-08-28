@@ -2,6 +2,8 @@ FROM sdnm/cassini-odtn:latest
 
 WORKDIR /root
 
+COPY init-service.sh .
+
 LABEL br.rnp.label.name="cassini-sdnm"\
       br.rnp.label.description="SDN transponder cassini from ODTN with dataplane by RNP"\
       br.rnp.label.vendor="National Network for Education and Research - RNP"\
@@ -14,7 +16,6 @@ RUN git clone https://github.com/fernnf/cassini-dataplane.git
 
 ENV PYTHONPATH=/root/cassini-dataplane/
 
-RUN chmod +x /root/cassini-dataplane/docker/sdnm/init-service.sh
+RUN chmod +x /root/init-service.sh
 
-
-CMD ["/root/cassini-dataplane/docker/sdnm/init-service.sh"]
+CMD ["/root/init-service.sh"]
