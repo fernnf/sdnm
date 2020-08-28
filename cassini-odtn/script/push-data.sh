@@ -49,6 +49,8 @@ function main () {
   sleep 5
   netconf-console --host 127.0.0.1 --port 830 -u root -p root --rpc=/root/script/config-power.xml
 
+  /usr/share/openvswitch/scripts/ovs-ctl --system-id=random --system-type="emulation" start
+
   mkdir /run/sshd
   /usr/sbin/sshd -D
 }

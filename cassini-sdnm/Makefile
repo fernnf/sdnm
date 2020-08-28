@@ -18,7 +18,7 @@ help: ## This help.
 
 builder: ## Build SDNML cassini image
 	@echo 'Building SDNML cassini image' \
-	&& $(DOCKER) build -t $(GROUP)/$(PROJECT):$(VERSION) -f Dockerfile ../../../transponder-cassini/
+	&& $(DOCKER) build -t $(GROUP)/$(PROJECT):$(VERSION) -f Dockerfile ../../sdnm/
 
 run: ## RUN SDNML cassini container
 	@echo 'Running SDNML cassini container' \
