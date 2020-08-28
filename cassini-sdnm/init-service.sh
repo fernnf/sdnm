@@ -55,7 +55,7 @@ function main () {
   /usr/share/openvswitch/scripts/ovs-ctl --system-id=random --system-type="emulation" start
 
   sleep 5
-  python3 /root/transponder-cassini/sdnml_cassini/main.py
+  python3 /root/cassini-dataplane/sdnml_cassini/main.py
 
 }
 
