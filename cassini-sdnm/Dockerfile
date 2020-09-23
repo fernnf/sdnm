@@ -18,6 +18,4 @@ ENV PYTHONPATH /root/cassini-dataplane/
 
 RUN chmod +x /root/init-service.sh
 
-ENV RUNNING '0'
-
 CMD ["/root/init-service.sh"]

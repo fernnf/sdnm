@@ -1,6 +1,7 @@
 #!/bin/bash 
 function main () {
   export LD_LIBRARY_PATH=/lib:/usr/lib:/usr/local/lib
+  export RUNNING='0'
   # Clean the yang space
   sysrepoctl --uninstall --module=openconfig-terminal-device --revision=2017-07-08
   sysrepoctl --uninstall --module=openconfig-platform-transceiver --revision=2018-05-15
