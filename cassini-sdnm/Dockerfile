@@ -14,8 +14,10 @@ LABEL br.rnp.label.name="cassini-sdnm"\
 
 RUN git clone https://github.com/fernnf/cassini-dataplane.git
 
-ENV PYTHONPATH=/root/cassini-dataplane/
+ENV PYTHONPATH /root/cassini-dataplane/
 
 RUN chmod +x /root/init-service.sh
+
+ENV RUNNING '0'
 
 CMD ["/root/init-service.sh"]
