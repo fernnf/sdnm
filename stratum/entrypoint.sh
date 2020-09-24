@@ -42,12 +42,12 @@ IPROUTE=/bin/ip
 
 for (( i = 1; i <= ${VPORTS_DEFAULT}; i++ )); do
   ${IPROUTE} link add ${HOSTNAME}-veth$i type veth peer name ${HOSTNAME}-p$i
-  ${IPROUTE} link set ${HOSTNAME}-veth$i mtu=9000
-  ${IPROUTE} link set ${HOSTNAME}-p$i mtu=9000
+  ${IPROUTE} link set ${HOSTNAME}-veth$i mtu 9000
+  ${IPROUTE} link set ${HOSTNAME}-p$i mtu 9000
   ${IPROUTE} link set ${HOSTNAME}-veth$i up
   ${IPROUTE} link set ${HOSTNAME}-p$i up
   ${IPROUTE} link add name port$i type bridge
-  ${IPROUTE} link set port$i mtu=9000
+  ${IPROUTE} link set port$i mtu 9000
   ${IPROUTE} link set port$i up
   ${IPROUTE} link set ${HOSTNAME}-p$i master port$i
 done
