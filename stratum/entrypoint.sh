@@ -67,7 +67,7 @@ function run_stratum() {
   -local_stratum_url=localhost:${GRPC_PORT} \
   -max_num_controllers_per_node=20 \
   -logtostderr=true \
-  -bmv2_log_level=debug
+  -bmv2_log_level=info
 }
 
 function create_onos_config() {

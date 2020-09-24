@@ -110,7 +110,7 @@ ENV NODEID 1
 ENV GRPC_PORT 50001
 ENV VPORTS_DEFAULT 10
 ENV CPU_PORT 255
-ENV DRIVER "stratum-bvm2"
+ENV DRIVER "stratum-bmv2"
 ENV STRATUM_CMD "/usr/local/bin/stratum_bmv2"
 ENV PIPECONF "org.onosproject.pipelines.basic"
 ENV PS1 "[sdnm:stratum-bmv2 \u@\h:\w]\$ "
