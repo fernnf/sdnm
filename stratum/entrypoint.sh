@@ -1,39 +1,14 @@
 #!/usr/bin/env bash
 
-function create_chassi() {
+function create_cfg() {
+python3 gencfg.py
 
-  cat <<EOF >/etc/stratum/chassi-config.txt
-description: "stratum_bvm2 sdn-multilayer"
-chassis {
-  platform: PLT_P4_SOFT_SWITCH
-  name: "${HOSTNAME}"
-}
-nodes {
-  id: ${NODEID}
-  name: "${HOSTNAME} node ${NODEID}"
-  slot: 1
-  index: 1
-}\n
+cat << EOF >/etc/stratum/netcfg.sh
+#!/usr/bin/env bash
+curl -sSL --user onos:rocks --noproxy localhost -X POST -H 'Content-Type:application/json' http://${IPADDR}:8181/onos/v1/network/configuration/ -d@onos-cfg.json
 EOF
-  echo " " >>/etc/stratum/chassi-config.txt
 
-  for ((i = 1; i <= ${VPORTS_DEFAULT}; i++)); do
-    cat <<FOE >>/etc/stratum/chassi-config.txt
-singleton_ports {
-  id : $i
-  name: "${HOSTNAME}-veth$i"
-  slot: 1
-  port: $i
-  channel: 1
-  speed_bps: 10000000000
-  config_params {
-    admin_state: ADMIN_STATE_ENABLED
-  }
-  node: ${NODEID}
-}\n
-FOE
-    echo " " >>/etc/stratum/chassi-config.txt
-  done
+chmod +x /etc/stratum/netcfg.sh
 }
 
 function create_interfaces() {
@@ -73,33 +48,11 @@ function run_stratum() {
     -bmv2_log_level=info
 }
 
-function create_onos_config() {
-cat <<EOF >/etc/stratum/onos-config.json
-{
-  "devices": {
-    "device:${HOSTNAME}": {
-      "basic": {
-        "managementAddress": "grpc://${IPADDR}:${GRPC_PORT}?device_id=${NODEID}",
-        "driver": "stratum-bmv2",
-        "pipeconf": "${PIPECONF}",
-      }
-    }
-  }
-}\n
-EOF
 
-cat <<EOF >/etc/stratum/netcfg.sh
-#!/usr/bin/env bash
-curl -sSL --user onos:rocks --noproxy localhost -X POST -H 'Content-Type:application/json' http://${IPADDR}:8181/onos/v1/network/configuration/ -d@onos-config.json
-EOF
-
-chmod +x /etc/stratum/netcfg.sh
-
-}
+# shellcheck disable=SC2155
 export IPADDR="$(hostname -I | xargs)"
 
 /usr/sbin/sshd
 create_interfaces
-create_chassi
-create_onos_config
+create_cfg
 run_stratum

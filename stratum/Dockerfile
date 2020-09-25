@@ -134,4 +134,6 @@ EXPOSE 22
 
 COPY entrypoint.sh .
 
+COPY gencfg.py .
+
 CMD ["/bin/bash", "entrypoint.sh"]
