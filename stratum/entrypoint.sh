@@ -85,7 +85,7 @@ cat <<EOF >/etc/stratum/onos-config.json
       }
     }
   }
-}
+}\n
 EOF
 
 cat <<EOF >/etc/stratum/netcfg.sh
