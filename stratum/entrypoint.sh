@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 function create_cfg() {
-python3 gencfg.py
+python gencfg.py
 
 cat << EOF >/etc/stratum/netcfg.sh
 #!/usr/bin/env bash
@@ -37,6 +37,7 @@ function run_stratum() {
 
   ${STRATUM_CMD} -device_id=${NODEID} \
     -persistent_config_dir=/etc/stratum \
+    -chassis_config_file=/etc/stratum/chassis-config.txt \
     -initial_pipeline=/etc/stratum/dummy.json \
     -forwarding_pipeline_configs_file=/etc/stratum/pipeline_cfg.pb.txt \
     -cpu_port=${CPU_PORT} \
@@ -45,7 +46,7 @@ function run_stratum() {
     -local_stratum_url=localhost:${GRPC_PORT} \
     -max_num_controllers_per_node=10 \
     -logtostderr=true \
-    -bmv2_log_level=info
+    -bmv2_log_level=warn
 }
 
 
