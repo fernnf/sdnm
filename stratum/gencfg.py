@@ -44,6 +44,7 @@ def create_cfg_onos():
     device = "device:{}".format(os.getenv("HOSTNAME"))
     pipeconf = os.getenv("PIPECONF")
 
+
     config = {
         'devices': {
             device: {
