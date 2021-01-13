@@ -1,6 +1,6 @@
-FROM alpine:latest
-RUN apk update
-RUN apk add iperf3 tcpdump iputils nano ethtool iproute2 net-tools bash
+FROM debian:buster-slim
+RUN apt-get update
+RUN apt-get install -y iperf3 tcpdump iputils-ping net-tools nano ethtool iproute2  bash
 
 ENV TERM=vt100
 ENV PS1="[sdnm:host \u@\h]# "
@@ -13,4 +13,4 @@ LABEL br.rnp.label.name="host"\
       br.rnp.label.version="0.1"\
       br.rnp.label.license="Apache2"
 
-CMD [ "/bin/ash" ]
+CMD [ "/bin/bash" ]
