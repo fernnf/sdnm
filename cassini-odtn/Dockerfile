@@ -1,13 +1,21 @@
 FROM ubuntu:18.04
-COPY yang /root/yang
-COPY config /root/config
-COPY script /root/script
+
+WORKDIR /root
 
 RUN apt-get update && apt-get upgrade -y \
     && apt-get install -y software-properties-common build-essential openssl libssl-dev libpcre3 libpcre3-dev git make \
     cmake bison flex pkg-config graphviz doxygen valgrind zlib1g zlib1g-dev libev-dev libavl-dev libprotobuf-c-dev \
     protobuf-c-compiler swig python-dev lua5.2 vim net-tools debhelper apt-utils python3-dev python3-pip man \
-    libcurl4-openssl-dev lib32ncurses5-dev
+    libcurl4-openssl-dev lib32ncurses5-dev git
+
+
+RUN git clone https://github.com/fernnf/cassini-dataplane.git
+
+RUN cp -r /root/cassini-dataplane/docker/odtn/yang /root
+RUN cp -r /root/cassini-dataplane/docker/odtn/config /root
+RUN cp -r /root/cassini-dataplane/docker/odtn/script /root
+
+RUN rm -rf /root/cassini-dataplane
 
 ENV LD_LIBRARY_PATH=/lib:/usr/lib:/usr/local/lib
 
@@ -44,6 +52,10 @@ RUN cd ~ && git clone https://github.com/CESNET/Netopeer2.git \
     && cd Netopeer2/ && git checkout v0.7-r1 && cd server \
     && mkdir build && cd build && cmake .. \
     && make -j4 && make install
+
+RUN ls /root/yang/openconfig-odtn
+
+RUN  python3 -m pip install -U pip
 
 RUN ssh-keygen -t rsa -b 2048 -f /etc/ssh/ssh_host_rsa_key \
     && echo "root:root" | chpasswd \
