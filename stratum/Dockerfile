@@ -9,7 +9,7 @@ RUN apt-get update && \
 
 WORKDIR /
 
-RUN git clone https://github.com/stratum/stratum.git
+RUN git clone -b 2020-12-18 https://github.com/stratum/stratum.git
 
 WORKDIR /stratum
 
