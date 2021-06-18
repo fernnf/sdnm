@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM debian:bullseye
 
 WORKDIR /root
 
@@ -50,6 +50,7 @@ RUN cd ~ && git clone https://github.com/sysrepo/sysrepo.git \
 
 RUN cd ~ && git clone https://github.com/CESNET/Netopeer2.git \
     && cd Netopeer2/ && git checkout v0.7-r1 && cd server \
+    && sed -i 's/gnu11/gnu11 -fcommon/' CMakeLists.txt \
     && mkdir build && cd build && cmake .. \
     && make -j4 && make install
 
